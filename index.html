@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verity.com</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: white;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: Arial, sans-serif;
+    }
+
+    .verity {
+      position: relative;
+      width: 300px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .verity img {
+      width: 100%;
+      display: block;
+      user-select: none;
+    }
+
+    /* THE CURSED INVISIBLE BUTTON */
+    .sound-button {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      opacity: 0;
+      border: 0;
+      z-index: 10;
+    }
+
+    h1 {
+      position: absolute;
+      top: -80px;
+      width: 100%;
+      font-size: 32px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="verity">
+
+    <h1>verity.com</h1>
+
+    <img src="verity.png" alt="Verity">
+
+    <iframe
+      class="sound-button"
+      src="https://www.myinstants.com/instant/hello-im-bark-fart-edit-80186/embed/"
+      frameborder="0"
+      scrolling="no">
+    </iframe>
+
+  </div>
+
+</body>
+</html>
