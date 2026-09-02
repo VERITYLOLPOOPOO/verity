@@ -1,59 +1,236 @@
-<!-- republish verity lol -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verity</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content=":3 — affordable gaming silicon, research, tools, and global community." />
+  <title>:3 — Gaming silicon for everyone</title>
   <style>
+    :root {
+      --bg: #0a0b0e;
+      --panel: #12141a;
+      --panel-2: #181b22;
+      --text: #f4f6fb;
+      --muted: #9ca4b3;
+      --line: #272b35;
+      --accent: #8b5cf6;
+      --accent-2: #22d3ee;
+      --good: #34d399;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      min-height: 100vh;
-      background: white;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% -10%, rgba(139,92,246,.2), transparent 35%),
+        radial-gradient(circle at 85% 8%, rgba(34,211,238,.14), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
     }
-
-    .verity-button {
-      position: relative;
-      width: 320px;
-      cursor: pointer;
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(10,11,14,.78);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-
-    .verity-button img {
-      width: 100%;
-      display: block;
-      user-select: none;
-      -webkit-user-drag: none;
+    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-size: 30px; font-weight: 900; letter-spacing: -1px; }
+    .brand span { color: var(--accent-2); }
+    .nav-links { display: flex; gap: 20px; color: #d9deea; font-size: 14px; }
+    .nav-actions { display: flex; gap: 10px; }
+    .btn {
+      border: 1px solid var(--line); background: var(--panel); color: var(--text);
+      padding: 10px 15px; border-radius: 12px; cursor: pointer; font-weight: 700;
     }
-
-    /* MyInstants button sits invisibly over Verity */
-    .sound {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      opacity: 0;
-      cursor: pointer;
+    .btn.primary { background: linear-gradient(135deg,var(--accent),#6d5dfc); border-color: transparent; }
+    .hero { padding: 96px 0 64px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+    .eyebrow { color: var(--accent-2); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+    h1 { font-size: clamp(48px, 8vw, 92px); line-height: .96; letter-spacing: -4px; margin: 14px 0 24px; max-width: 900px; }
+    .hero p { color: var(--muted); font-size: 20px; max-width: 690px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .chip-card {
+      min-height: 430px; border-radius: 28px; border: 1px solid var(--line); padding: 28px;
+      background: linear-gradient(160deg, #1c2030 0%, #11131a 60%, #0e1117 100%);
+      position: relative; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    }
+    .chip-card::after { content:""; position:absolute; width:260px;height:260px;border-radius:50%; right:-80px;top:-60px;background:rgba(34,211,238,.12);filter:blur(10px); }
+    .silicon {
+      width: 230px; aspect-ratio:1; margin: 48px auto 24px; border-radius: 30px;
+      background: linear-gradient(145deg,#2d3340,#11151d); border: 2px solid #454d5d;
+      display:grid;place-items:center; position:relative; box-shadow: inset 0 0 0 12px #171b23, 0 20px 50px rgba(0,0,0,.4);
+    }
+    .silicon::before { content:"";position:absolute;inset:-25px;border:1px dashed rgba(139,92,246,.45);border-radius:38px; }
+    .silicon-logo { font-size: 64px; font-weight: 1000; }
+    .chip-meta { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; }
+    .metric { background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:14px; }
+    .metric strong { display:block; font-size:18px; }
+    .metric span { color:var(--muted); font-size:12px; }
+    section { padding: 64px 0; }
+    .section-head { display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:24px; }
+    h2 { font-size: clamp(32px,5vw,54px);letter-spacing:-2px;margin:0; }
+    .section-head p { color:var(--muted);max-width:560px;margin:0; }
+    .grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+    .card { background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:22px; }
+    .card h3 { margin:0 0 8px;font-size:20px; }
+    .card p { color:var(--muted);margin:0; }
+    .tag { display:inline-flex;align-items:center;gap:8px;font-size:12px;color:#dfe5f2;border:1px solid var(--line);border-radius:999px;padding:6px 10px;margin-bottom:14px;background:rgba(255,255,255,.03); }
+    .product { display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch; }
+    .product .card { min-height:300px; }
+    .price { font-size:50px;font-weight:900;letter-spacing:-2px;margin:16px 0 2px; }
+    .price small { font-size:16px;color:var(--muted);font-weight:600; }
+    .specs { display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px; }
+    .spec { padding:13px;border:1px solid var(--line);border-radius:12px;background:#0e1117; }
+    .spec strong{display:block;} .spec span{color:var(--muted);font-size:12px;}
+    .research-list { display:grid;gap:12px; }
+    .paper { display:flex;justify-content:space-between;gap:20px;align-items:center;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel); }
+    .paper small { color:var(--muted); }
+    .language-grid,.location-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:12px; }
+    .mini { padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel); }
+    .mini b { display:block;margin-bottom:4px; }
+    .mini span { color:var(--muted);font-size:13px; }
+    .account-box { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
+    .form { display:grid;gap:12px; }
+    .field { display:grid;gap:6px; }
+    .field label { color:#dfe5f2;font-size:13px;font-weight:700; }
+    .field input,.field select { width:100%;background:#0e1117;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px; }
+    .notice { color:var(--muted);font-size:13px; }
+    footer { border-top:1px solid var(--line);padding:34px 0 50px;color:var(--muted); }
+    .footer-grid { display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap; }
+    @media (max-width: 860px) {
+      .nav-links { display:none; }
+      .hero-grid,.product,.account-box { grid-template-columns:1fr; }
+      .grid { grid-template-columns:1fr; }
+      .language-grid,.location-grid { grid-template-columns:repeat(2,1fr); }
+      h1 { letter-spacing:-2px; }
     }
   </style>
 </head>
-
 <body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">:<span>3</span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#product">Product</a>
+        <a href="#research">Research</a>
+        <a href="#languages">Languages</a>
+        <a href="#locations">Locations</a>
+        <a href="#account">Account</a>
+      </nav>
+      <div class="nav-actions"><a class="btn" href="#account">Sign in</a><a class="btn primary" href="#product">See the chip</a></div>
+    </div>
+  </header>
 
-  <div class="verity-button">
-    <img src="verity.png" alt="Verity">
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Gaming silicon without the luxury tax</div>
+          <h1>Cheap chip.<br>Serious frames.</h1>
+          <p>:3 is building affordable gaming hardware for people who care more about performance than prestige. Our first product is a sub-$50 gaming chip, designed around efficiency, accessible pricing, and open technical research.</p>
+          <div class="hero-actions"><a class="btn primary" href="#product">Meet the first chip</a><a class="btn" href="#research">Read research</a></div>
+        </div>
+        <div class="chip-card">
+          <div class="tag">FIRST PRODUCT • CODENAME PENDING</div>
+          <div class="silicon"><div class="silicon-logo">:3</div></div>
+          <div class="chip-meta">
+            <div class="metric"><strong>&lt; $50</strong><span>target price</span></div>
+            <div class="metric"><strong>Gaming</strong><span>first priority</span></div>
+            <div class="metric"><strong>Efficient</strong><span>design target</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <iframe
-      class="sound"
-      src="https://www.myinstants.com/instant/hello-im-bark-fart-edit-80186/embed/"
-      scrolling="no">
-    </iframe>
-  </div>
+    <section id="product">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Product 001</div><h2>The first :3 chip</h2></div><p>The name is intentionally temporary. Once we choose the product name, this page can be updated immediately.</p></div>
+        <div class="product">
+          <div class="card">
+            <div class="tag">WORKING NAME • :3 CHIP 01</div>
+            <h3>Built for budget gaming</h3>
+            <p>A low-cost gaming-focused chip concept with a target retail price below $50. Performance claims stay intentionally conservative until real silicon and benchmarks exist.</p>
+            <div class="price">&lt;$50 <small>target</small></div>
+            <div class="hero-actions"><button class="btn primary" onclick="document.querySelector('#account').scrollIntoView()">Join updates</button><a class="btn" href="#research">Architecture notes</a></div>
+          </div>
+          <div class="card">
+            <div class="specs">
+              <div class="spec"><strong>Gaming first</strong><span>Optimized around real game workloads</span></div>
+              <div class="spec"><strong>Low cost</strong><span>Targeting a price under $50</span></div>
+              <div class="spec"><strong>Open research</strong><span>Publish what can be shared</span></div>
+              <div class="spec"><strong>Global access</strong><span>Language and region support from day one</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <section id="research">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Research</div><h2>Show the work.</h2></div><p>A public-facing research hub for architecture notes, benchmarks, developer documents, and experiments.</p></div>
+        <div class="research-list">
+          <div class="paper"><div><b>Budget gaming silicon: design goals</b><br><small>Research note • Draft</small></div><span>Read →</span></div>
+          <div class="paper"><div><b>Performance-per-dollar methodology</b><br><small>Benchmark methodology • Planned</small></div><span>Read →</span></div>
+          <div class="paper"><div><b>Developer tooling and instruction research</b><br><small>Technical documentation • Planned</small></div><span>Read →</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="languages">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Languages</div><h2>Built for more than one audience.</h2></div><p>The site structure is ready for localized product pages, documentation, support, and research.</p></div>
+        <div class="language-grid">
+          <div class="mini"><b>English</b><span>Primary</span></div>
+          <div class="mini"><b>العربية</b><span>Planned</span></div>
+          <div class="mini"><b>Français</b><span>Planned</span></div>
+          <div class="mini"><b>Español</b><span>Planned</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="locations">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Locations</div><h2>Where :3 operates.</h2></div><p>Regional availability can be added as the company grows. These are placeholders, not claims of current offices.</p></div>
+        <div class="location-grid">
+          <div class="mini"><b>North Africa</b><span>Region page placeholder</span></div>
+          <div class="mini"><b>Europe</b><span>Region page placeholder</span></div>
+          <div class="mini"><b>North America</b><span>Region page placeholder</span></div>
+          <div class="mini"><b>Asia-Pacific</b><span>Region page placeholder</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="account">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Accounts</div><h2>Your :3 account.</h2></div><p>A front-end account concept for product updates, research subscriptions, language preferences, and region settings. It does not yet connect to a backend.</p></div>
+        <div class="account-box">
+          <div class="card">
+            <h3>Create account</h3>
+            <div class="form">
+              <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com" /></div>
+              <div class="field"><label for="password">Password</label><input id="password" type="password" placeholder="••••••••" /></div>
+              <div class="field"><label for="lang">Language</label><select id="lang"><option>English</option><option>العربية</option><option>Français</option><option>Español</option></select></div>
+              <button class="btn primary" type="button" onclick="alert('Prototype only — backend accounts are not connected yet.')">Create account</button>
+              <div class="notice">Prototype UI only. No credentials are stored or transmitted.</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>What an account can eventually do</h3>
+            <p>Save product interests, choose language and region, follow research updates, manage developer access, and receive launch notifications.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid"><strong>:3</strong><span>Affordable hardware. Serious engineering.</span><span>Prototype branch • brand-3-site</span></div>
+  </footer>
 </body>
 </html>
