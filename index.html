@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content=":3 — home of Pico, a chill sub-$50 gaming CPU concept, plus research, tools, and a global community." />
-  <title>:3 Pico — Just a chill gaming CPU</title>
+  <meta name="description" content=":3 — pronounced me. Home of Pico, a chill sub-$50 low-end gaming CPU concept, plus research, tools, and a global community." />
+  <title>:3 Pico — Just a chill low-end gaming CPU</title>
   <style>
     :root {
       --bg: #0a0b0e;
@@ -15,7 +15,6 @@
       --line: #272b35;
       --accent: #8b5cf6;
       --accent-2: #22d3ee;
-      --good: #34d399;
       --max: 1180px;
     }
     * { box-sizing: border-box; }
@@ -40,8 +39,12 @@
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { font-size: 30px; font-weight: 900; letter-spacing: -1px; }
-    .brand span { color: var(--accent-2); }
+    .brand { display:inline-flex; align-items:center; gap:4px; font-size:30px; font-weight:800; letter-spacing:-1px; }
+    .face-colon { width:7px; height:24px; position:relative; display:inline-block; }
+    .face-colon::before,.face-colon::after { content:""; position:absolute; left:0; width:6px; height:6px; border-radius:50%; background:var(--text); }
+    .face-colon::before { top:5px; }
+    .face-colon::after { top:13px; }
+    .brand-three { color:var(--accent-2); font-weight:800; }
     .nav-links { display: flex; gap: 20px; color: #d9deea; font-size: 14px; }
     .nav-actions { display: flex; gap: 10px; }
     .btn {
@@ -53,6 +56,7 @@
     .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
     .eyebrow { color: var(--accent-2); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
     h1 { font-size: clamp(48px, 8vw, 92px); line-height: .96; letter-spacing: -4px; margin: 14px 0 24px; max-width: 900px; }
+    .pico-word { font-weight:500; letter-spacing:-.02em; }
     .hero p { color: var(--muted); font-size: 20px; max-width: 690px; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
     .chip-card {
@@ -67,8 +71,8 @@
       display:grid;place-items:center; position:relative; box-shadow: inset 0 0 0 12px #171b23, 0 20px 50px rgba(0,0,0,.4);
     }
     .silicon::before { content:"";position:absolute;inset:-25px;border:1px dashed rgba(139,92,246,.45);border-radius:38px; }
-    .silicon-logo { font-size: 42px; font-weight: 1000; text-align:center; line-height:1.05; }
-    .silicon-logo small { display:block; margin-top:8px; font-size:20px; color:var(--accent-2); letter-spacing:.04em; }
+    .silicon-logo { font-size: 42px; font-weight: 850; text-align:center; line-height:1.05; }
+    .silicon-logo small { display:block; margin-top:8px; font-size:20px; color:var(--accent-2); letter-spacing:.04em; font-weight:500; }
     .chip-meta { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; }
     .metric { background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:14px; }
     .metric strong { display:block; font-size:18px; }
@@ -77,6 +81,7 @@
     .section-head { display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:24px; }
     h2 { font-size: clamp(32px,5vw,54px);letter-spacing:-2px;margin:0; }
     .section-head p { color:var(--muted);max-width:560px;margin:0; }
+    .product-title { font-weight:500; }
     .grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
     .card { background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:22px; }
     .card h3 { margin:0 0 8px;font-size:20px; }
@@ -84,7 +89,7 @@
     .tag { display:inline-flex;align-items:center;gap:8px;font-size:12px;color:#dfe5f2;border:1px solid var(--line);border-radius:999px;padding:6px 10px;margin-bottom:14px;background:rgba(255,255,255,.03); }
     .product { display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch; }
     .product .card { min-height:300px; }
-    .price { font-size:50px;font-weight:900;letter-spacing:-2px;margin:16px 0 2px; }
+    .price { font-size:50px;font-weight:800;letter-spacing:-2px;margin:16px 0 2px; }
     .price small { font-size:16px;color:var(--muted);font-weight:600; }
     .specs { display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px; }
     .spec { padding:13px;border:1px solid var(--line);border-radius:12px;background:#0e1117; }
@@ -96,17 +101,11 @@
     .mini { padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel); }
     .mini b { display:block;margin-bottom:4px; }
     .mini span { color:var(--muted);font-size:13px; }
-    .account-box { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
-    .form { display:grid;gap:12px; }
-    .field { display:grid;gap:6px; }
-    .field label { color:#dfe5f2;font-size:13px;font-weight:700; }
-    .field input,.field select { width:100%;background:#0e1117;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px; }
-    .notice { color:var(--muted);font-size:13px; }
     footer { border-top:1px solid var(--line);padding:34px 0 50px;color:var(--muted); }
     .footer-grid { display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap; }
     @media (max-width: 860px) {
       .nav-links { display:none; }
-      .hero-grid,.product,.account-box { grid-template-columns:1fr; }
+      .hero-grid,.product { grid-template-columns:1fr; }
       .grid { grid-template-columns:1fr; }
       .language-grid,.location-grid { grid-template-columns:repeat(2,1fr); }
       h1 { letter-spacing:-2px; }
@@ -116,15 +115,15 @@
 <body>
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="#top">:<span>3</span></a>
+      <a class="brand" href="#top" aria-label=":3, pronounced me"><span class="face-colon" aria-hidden="true"></span><span class="brand-three">3</span></a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#product">Product</a>
         <a href="#research">Research</a>
         <a href="#languages">Languages</a>
         <a href="#locations">Locations</a>
-        <a href="#account">Account</a>
+        <a href="/verity/account/" target="_blank" rel="noopener">Account</a>
       </nav>
-      <div class="nav-actions"><a class="btn" href="#account">Sign in</a><a class="btn primary" href="#product">Meet Pico</a></div>
+      <div class="nav-actions"><a class="btn" href="/verity/account/" target="_blank" rel="noopener">Sign in</a><a class="btn primary" href="/verity/Pico/" target="_blank" rel="noopener">Meet Pico</a></div>
     </div>
   </header>
 
@@ -132,17 +131,17 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="eyebrow">Introducing :3 Pico</div>
-          <h1>Just a chill<br>gaming CPU.</h1>
-          <p>:3 Pico is our first product idea: a very affordable gaming CPU with a target price under $50. The goal is simple — make genuinely useful gaming tech that more people can afford, then keep building from there.</p>
-          <div class="hero-actions"><a class="btn primary" href="#product">Meet Pico</a><a class="btn" href="#research">Read research</a></div>
+          <div class="eyebrow">Introducing :3 <span class="pico-word">Pico</span></div>
+          <h1>Just a chill<br>low-end gaming CPU.</h1>
+          <p>:3 <span class="pico-word">Pico</span> is our first product idea: a very affordable, low-end gaming CPU with a target price under $50. It is not supposed to be the monster flagship. Pico is the friendly entry point.</p>
+          <div class="hero-actions"><a class="btn primary" href="/verity/Pico/" target="_blank" rel="noopener">Meet Pico</a><a class="btn" href="#research">Read research</a></div>
         </div>
         <div class="chip-card">
           <div class="tag">FIRST PRODUCT • :3 PICO</div>
-          <div class="silicon"><div class="silicon-logo">:3<small>PICO</small></div></div>
+          <div class="silicon"><div class="silicon-logo">:3<small>Pico</small></div></div>
           <div class="chip-meta">
             <div class="metric"><strong>&lt; $50</strong><span>target price</span></div>
-            <div class="metric"><strong>Gaming</strong><span>first priority</span></div>
+            <div class="metric"><strong>Low-end</strong><span>gaming tier</span></div>
             <div class="metric"><strong>Chill</strong><span>product philosophy</span></div>
           </div>
         </div>
@@ -151,21 +150,21 @@
 
     <section id="product">
       <div class="wrap">
-        <div class="section-head"><div><div class="eyebrow">Product 001</div><h2>:3 Pico</h2></div><p>A small beginning with a big goal: build technology people are happy to use.</p></div>
+        <div class="section-head"><div><div class="eyebrow">Product 001</div><h2 class="product-title">:3 Pico</h2></div><p>A small beginning with a big goal: build technology people are happy to use.</p></div>
         <div class="product">
           <div class="card">
-            <div class="tag">:3 PICO • GAMING CPU</div>
+            <div class="tag">:3 PICO • LOW-END GAMING CPU</div>
             <h3>Just a chill gaming CPU.</h3>
-            <p>A low-cost gaming-focused CPU concept with a target retail price below $50. Performance claims stay intentionally conservative until real silicon and benchmarks exist.</p>
+            <p>A low-cost, low-end gaming CPU concept with a target retail price below $50. Performance claims stay conservative until real silicon and benchmarks exist.</p>
             <div class="price">&lt;$50 <small>target</small></div>
-            <div class="hero-actions"><button class="btn primary" onclick="document.querySelector('#account').scrollIntoView()">Join Pico updates</button><a class="btn" href="#research">Architecture notes</a></div>
+            <div class="hero-actions"><a class="btn primary" href="/verity/Pico/" target="_blank" rel="noopener">Open Pico site</a><a class="btn" href="#research">Architecture notes</a></div>
           </div>
           <div class="card">
             <div class="specs">
-              <div class="spec"><strong>Gaming first</strong><span>Designed around real game workloads</span></div>
+              <div class="spec"><strong>Low-end gaming</strong><span>Entry-level gaming is the point</span></div>
               <div class="spec"><strong>Low cost</strong><span>Targeting a price under $50</span></div>
               <div class="spec"><strong>Open research</strong><span>Publish what can be shared</span></div>
-              <div class="spec"><strong>Global access</strong><span>Language and region support from day one</span></div>
+              <div class="spec"><strong>Future headroom</strong><span>Flagship ideas can come later</span></div>
             </div>
           </div>
         </div>
@@ -176,9 +175,9 @@
       <div class="wrap">
         <div class="section-head"><div><div class="eyebrow">Research</div><h2>Show the work.</h2></div><p>A public-facing research hub for Pico architecture notes, benchmarks, developer documents, and experiments.</p></div>
         <div class="research-list">
-          <div class="paper"><div><b>:3 Pico: budget gaming CPU design goals</b><br><small>Research note • Draft</small></div><span>Read →</span></div>
+          <div class="paper"><div><b>:3 Pico: low-end gaming CPU design goals</b><br><small>Research note • Draft</small></div><span>Read →</span></div>
           <div class="paper"><div><b>Performance-per-dollar methodology</b><br><small>Benchmark methodology • Planned</small></div><span>Read →</span></div>
-          <div class="paper"><div><b>Developer tooling and instruction research</b><br><small>Technical documentation • Planned</small></div><span>Read →</span></div>
+          <div class="paper"><div><b>Future high-end CPU research</b><br><small>Ideas only • No promised core counts or pricing</small></div><span>Later →</span></div>
         </div>
       </div>
     </section>
@@ -206,32 +205,10 @@
         </div>
       </div>
     </section>
-
-    <section id="account">
-      <div class="wrap">
-        <div class="section-head"><div><div class="eyebrow">Accounts</div><h2>Your :3 account.</h2></div><p>A front-end account concept for Pico updates, research subscriptions, language preferences, and region settings. It does not yet connect to a backend.</p></div>
-        <div class="account-box">
-          <div class="card">
-            <h3>Create account</h3>
-            <div class="form">
-              <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com" /></div>
-              <div class="field"><label for="password">Password</label><input id="password" type="password" placeholder="••••••••" /></div>
-              <div class="field"><label for="lang">Language</label><select id="lang"><option>English</option><option>العربية</option><option>Français</option><option>Español</option></select></div>
-              <button class="btn primary" type="button" onclick="alert('Prototype only — backend accounts are not connected yet.')">Create account</button>
-              <div class="notice">Prototype UI only. No credentials are stored or transmitted.</div>
-            </div>
-          </div>
-          <div class="card">
-            <h3>What an account can eventually do</h3>
-            <p>Save interest in Pico, choose language and region, follow research updates, manage developer access, and receive launch notifications.</p>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
-    <div class="wrap footer-grid"><strong>:3</strong><span>Build tech people are happy to use.</span><span>:3 Pico • Product 001</span></div>
+    <div class="wrap footer-grid"><strong>:3</strong><span>Pronounced “me”. Build tech people are happy to use.</span><span>:3 Pico • Product 001</span></div>
   </footer>
 </body>
 </html>
